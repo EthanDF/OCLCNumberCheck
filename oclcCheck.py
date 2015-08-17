@@ -1,5 +1,11 @@
 import requests
 import csv
+import tkinter
+
+# r = requests(testurl)
+
+root = tkinter.Tk()
+root.withdraw()
 # oclc = 13755345
 
 def checkURL(oclcNum):
@@ -60,8 +66,10 @@ def checkFLVC(goodOCLCNum):
 
     return foundInResults
 
-def printResults(results):
-    logFile = 'oclcLogResults.csv'
+def printResults(results, logFile):
+
+    # logFile = 'oclcLogResults.csv'
+
 
     rows = []
     rows.append(results)
@@ -95,7 +103,14 @@ def validateOCLC(ocl):
 def runValidation():
 
     oclList = []
-    oclcNumberFile = 'oclcList.csv'
+    from tkinter import filedialog
+
+    marcPath = tkinter.filedialog.askopenfile()
+    oclcNumberFile = marcPath.name
+
+    logPath = tkinter.filedialog.askopenfile()
+    logFile = logPath.name
+    # oclcNumberFile = 'oclcList.csv'
 
     with open(oclcNumberFile, 'r') as f:
         reader = csv.reader(f)
@@ -108,11 +123,11 @@ def runValidation():
         for r in tempresults:
             results.append(r)
 
-        printResults(results)
+        printResults(results, logFile)
 
         stop = 'n'
         # stop = input("stop?")
         if stop == 'y':
             break
 
-
+runValidation()

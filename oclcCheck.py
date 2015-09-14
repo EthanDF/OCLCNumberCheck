@@ -105,12 +105,16 @@ def runValidation():
     oclList = []
     from tkinter import filedialog
 
+    input("press any key to choose a MarcFile\n")
     marcPath = tkinter.filedialog.askopenfile()
     oclcNumberFile = marcPath.name
 
+    input("thanks! press any key to choose a results log\n")
     logPath = tkinter.filedialog.askopenfile()
     logFile = logPath.name
     # oclcNumberFile = 'oclcList.csv'
+
+    print("thanks... checking...")
 
     with open(oclcNumberFile, 'r') as f:
         reader = csv.reader(f)

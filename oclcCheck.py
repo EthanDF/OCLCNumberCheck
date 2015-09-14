@@ -105,7 +105,7 @@ def runValidation():
     oclList = []
     from tkinter import filedialog
 
-    input("press any key to choose a MarcFile\n")
+    input("press any key to choose a Input File\n")
     marcPath = tkinter.filedialog.askopenfile()
     oclcNumberFile = marcPath.name
 

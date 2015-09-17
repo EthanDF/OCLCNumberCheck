@@ -24,6 +24,11 @@ def checkURL(oclcNum):
 
     oclcMaster = rt[rt.find(buzzWord)+len(buzzWord):rt.find('"',rt.find(buzzWord))]
 
+    try:
+        int(oclcMaster)
+    except ValueError:
+        oclcMaster = -1
+
 
     # counter = 0
     # counterResult = 0
@@ -89,6 +94,8 @@ def validateOCLC(ocl):
     goodOCL = checkURL(ocl)
     if goodOCL == ocl:
         results = [ocl, goodOCL, 0, 0]
+    elif goodOCL == -1:
+        results = [ocl, 'invalid oclc number', 0, 0]
     else:
         inFLVC = checkFLVC(goodOCL)
         if inFLVC[0]:
@@ -122,7 +129,14 @@ def runValidation():
 
     for row in oclList:
         results = []
-        tempresults = validateOCLC(int(row[1]))
+        try:
+            int(row[1])
+            tempresults = validateOCLC(int(row[1]))
+        except ValueError:
+            tempresults = ['invalid OCLC Number', -1, -1]
+
+
+        # tempresults = validateOCLC(int(row[1]))
         results.append(row[0])
         for r in tempresults:
             results.append(r)
